@@ -16,26 +16,55 @@
 # next.js
 /.next/
 /out/
+.next-env.d.ts
 
 # production
 /build
+/dist
 
-# misc
-.DS_Store
-*.pem
+# env files — .env.example is documentation and is committed
+.env
+.env.*
+!.env.example
 
-# debug
+# vercel / netlify
+.vercel
+.netlify
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# caches
+.eslintcache
+.turbo
+.cache
 
-# vercel
-.vercel
+# editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# os
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# certificates and keys
+*.pem
+*.key
+*.p12
+
+# local scratch work — screenshots, extracted PDF text, one-off scripts
+/scratch/
+/shots/
+*.local.*
