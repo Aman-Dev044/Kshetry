@@ -14,10 +14,28 @@ prepared by Adv. Shaina Z.
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build
-npm start       # serve the production build
+cp .env.example .env     # sets PORT=4142
+npm run dev              # http://localhost:4142
+npm run build            # production build
+npm start                # serve the production build on 4142
 ```
+
+`.env` is the single source of truth for where the server runs:
+
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `PORT` | `4142` | The only port this project runs on |
+| `HOST` | `0.0.0.0` | Bind every interface, so the machine's own IP serves the site |
+
+`scripts/serve.mjs` reads both, checks the port is actually free, and passes
+them to Next explicitly. That is needed because Next resolves its port and host
+*before* env files load, so it never sees `PORT` or `HOST` from `.env` — and
+left to itself it silently moves to the next free port and binds localhost
+only. The script removes both surprises: on a server the site answers on its
+IP, and if 4142 is taken it stops with an explanation instead of starting
+somewhere else.
+
+Set `HOST=127.0.0.1` if you want it reachable locally only.
 
 | Route | What it is |
 | --- | --- |
@@ -32,12 +50,6 @@ npm start       # serve the production build
 | `/faqs` | 26 questions in six accordion groups |
 | `/disclaimer` `/terms` `/privacy` `/cookies` | The firm's own legal wording |
 | `/design-system` | Living design-system reference (noindex) |
-
-Copy the environment file before running:
-
-```bash
-cp .env.example .env.local
-```
 
 ---
 
